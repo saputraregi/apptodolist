@@ -1,6 +1,7 @@
 <?php
     session_start();
     
+    //Data Array
     if (!isset($_SESSION['tasks'])) {
         $_SESSION['tasks'] = [
             ["id" => 1, "title" => "Tugas Nomor 1", "status" => "belum"],
@@ -9,12 +10,14 @@
     }
     $tasks = $_SESSION['tasks'];
 
+    //Menambahkan Tugas
     if (isset($_POST['new_task']) && !empty($_POST['new_task'])) {
         $newTitle = htmlspecialchars($_POST['new_task']);
         $newId = end($tasks)['id'] + 1;
         $tasks[] = ["id" => $newId, "title" => $newTitle, "status" => "belum"];
     }
 
+    //Menandai Tugas
     if (isset($_GET['toggle'])) {
         foreach ($tasks as &$task) {
             if ($task['id'] == $_GET['toggle']) {
@@ -24,12 +27,14 @@
         }
     }
 
+    //Menghapus Tugas
     if (isset($_GET['hapus'])) {
         $tasks = array_filter($tasks, function ($task) {
             return $task['id'] != $_GET['hapus'];
         });
     }
 
+    //Mengedit Tugas
     if (isset($_POST['edit_id']) && isset($_POST['edit_task'])) {
         foreach ($tasks as &$task) {
             if ($task['id'] == $_POST['edit_id']) {
@@ -41,6 +46,7 @@
 
     $_SESSION['tasks'] = $tasks;
 
+    //Fungsi Menampilkan Data Array
     function tampilkanDaftar($tasks) {
     foreach ($tasks as $task) {
         $checked = ($task['status'] == 'selesai') ? 'checked' : '';
