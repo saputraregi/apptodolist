@@ -67,7 +67,7 @@
     <head>
         <title>Aplikasi To-Do List Sederhana</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="assets/style.css">
     </head>
     <body>
         <div class="container mt-5">    
