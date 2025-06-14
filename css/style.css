@@ -1,0 +1,20 @@
+body {
+    background-color: #f8f9fa;
+}
+
+h1 {
+    color: #343a40;
+}
+
+.form-check-label {
+    font-size: 16px;
+}
+
+.btn {
+    margin-left: 5px;
+}
+
+.selesai {
+    text-decoration: line-through; /* Membuat tulisan tercoret */
+    opacity: 0.6; /* Membuat tulisan agak transparan */
+}
