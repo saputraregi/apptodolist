@@ -13,7 +13,8 @@
     //Menambahkan Tugas
     if (isset($_POST['new_task']) && !empty($_POST['new_task'])) {
         $newTitle = htmlspecialchars($_POST['new_task']);
-        $newId = end($tasks)['id'] + 1;
+        $lastTask = end($tasks);
+        $newId = $lastTask ? $lastTask['id'] + 1 : 1;
         $tasks[] = ["id" => $newId, "title" => $newTitle, "status" => "belum"];
     }
 
@@ -25,6 +26,11 @@
                 break;
             }
         }
+        // Simpan kembali ke session
+        $_SESSION['tasks'] = $tasks;
+        // Redirect untuk menghilangkan parameter toggle
+        header("Location: index.php");
+        exit;
     }
 
     //Menghapus Tugas
@@ -32,6 +38,9 @@
         $tasks = array_filter($tasks, function ($task) {
             return $task['id'] != $_GET['hapus'];
         });
+        $_SESSION['tasks'] = $tasks;
+        header("Location: index.php"); // <- Redirect
+        exit;
     }
 
     //Mengedit Tugas
